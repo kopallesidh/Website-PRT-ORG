@@ -13,9 +13,8 @@ pipeline {
         stage('Docker') {
             steps {
                 sh 'sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}'
-                sh 'ls -l' // Optional debug
-                sh 'sudo docker build -t sidhartha700/pet-task -f Dockerfile .'
-                sh 'sudo docker push sidhartha700/pet-task'
+                sh 'sudo docker build -t $IMAGE_NAME $WORKSPACE'
+                sh 'sudo docker push $IMAGE_NAME'
 
             }
         }
