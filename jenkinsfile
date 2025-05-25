@@ -13,9 +13,7 @@ pipeline {
         stage('Docker') {
             steps {
                 sh 'sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}'
-                sh 'find ${WORKSPACE} -name Dockerfile'  // Helps confirm Dockerfile location
-                sh 'sudo docker build -t sidhartha700/pet-task ${WORKSPACE}'  // Dynamic path
-                sh 'sudo docker push sidhartha700/pet-task'
+                sh 'find $WORKSPACE -name Dockerfile'
             }
         }
         stage('k8s') {
