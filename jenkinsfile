@@ -1,0 +1,27 @@
+pipeline {
+    environment{
+        DOCKERHUB_CREDENTIALS = credentials("dhubcred")
+    }
+    agent { label 'K-M' }
+
+    stages {
+        stage('Git') {
+            steps {
+                git 'https://github.com/Sameer-8080/website-prt-org'
+            }
+        }
+        stage('Docker') {
+            steps {
+                sh 'sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}'
+                sh 'sudo docker build -t sidhartha700/pet-task /home/ubuntu/jenkins/workspace/Test-PRT-Pipeline'
+                sh 'sudo docker push sidhartha700/pet-task'
+            }
+        }
+        stage('k8s') {
+            steps {
+                sh 'kubectl apply -f deploy.yaml'
+                sh 'kubectl apply -f service.yaml'
+            }
+        }
+    }
+}
