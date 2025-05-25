@@ -14,8 +14,7 @@ pipeline {
             steps {
                 sh 'sudo docker login -u ${DOCKERHUB_CREDENTIALS_USR} -p ${DOCKERHUB_CREDENTIALS_PSW}'
                 sh 'ls -l' // Optional debug
-                sh 'sudo docker build -t sidhartha700/pet-task .'
-                sh 'sudo docker build -t sidhartha700/pet-task /home/ubuntu/jenkins/workspace/Test-PRT'
+                sh 'sudo docker build -t sidhartha700/pet-task -f Docker .'
                 sh 'sudo docker push sidhartha700/pet-task'
 
             }
