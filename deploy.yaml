@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: mydeployment-cont
-        image: intellipaatsal/pet-task:latest
+        image: ‎sidhartha700/pet-task:latest
         ports:
         - containerPort: 80
